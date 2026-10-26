@@ -1,0 +1,325 @@
+{
+  "compiler": "0.8.26+commit.8a97fa7a.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "AlamatNol",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "BukanPemilik",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "JangkarKosong",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "rantaiTersimpan",
+          "type": "bytes32"
+        }
+      ],
+      "name": "JangkarSudahAda",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "PerangkatTidakTerdaftar",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TandaTanganTidakSah",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "perangkat",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint32",
+          "name": "jam",
+          "type": "uint32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint16",
+          "name": "jumlah",
+          "type": "uint16"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "rantai",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "pengirim",
+          "type": "address"
+        }
+      ],
+      "name": "JangkarDicatat",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "lama",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "baru",
+          "type": "address"
+        }
+      ],
+      "name": "PemilikDiganti",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "perangkat",
+          "type": "address"
+        }
+      ],
+      "name": "PerangkatDicabut",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "perangkat",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "nama",
+          "type": "string"
+        }
+      ],
+      "name": "PerangkatDidaftarkan",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "perangkat",
+          "type": "address"
+        }
+      ],
+      "name": "cabutPerangkat",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "perangkat",
+          "type": "address"
+        },
+        {
+          "internalType": "uint32",
+          "name": "jam",
+          "type": "uint32"
+        },
+        {
+          "internalType": "uint16",
+          "name": "jumlah",
+          "type": "uint16"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "rantai",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint8",
+          "name": "v",
+          "type": "uint8"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "r",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "s",
+          "type": "bytes32"
+        }
+      ],
+      "name": "catatJangkar",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "perangkat",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "nama",
+          "type": "string"
+        }
+      ],
+      "name": "daftarkanPerangkat",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "perangkat",
+          "type": "address"
+        },
+        {
+          "internalType": "uint32",
+          "name": "jam",
+          "type": "uint32"
+        },
+        {
+          "internalType": "uint16",
+          "name": "jumlah",
+          "type": "uint16"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "rantai",
+          "type": "bytes32"
+        }
+      ],
+      "name": "digestJangkar",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "baru",
+          "type": "address"
+        }
+      ],
+      "name": "gantiPemilik",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pemilik",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "perangkatTerdaftar",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        },
+        {
+          "internalType": "uint32",
+          "name": "",
+          "type": "uint32"
+        }
+      ],
+      "name": "rantaiJangkar",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalJangkar",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x6080604052348015600e575f80fd5b505f80546001600160a01b0319163390811782556040519091907f4d2f970658528b97409d9cef8eb66d4d0e9d71c7bd3d8dd458c2d2ab93ba3101908290a36108728061005a5f395ff3fe608060405234801561000f575f80fd5b5060043610610090575f3560e01c80635979134c116100635780635979134c1461010a5780635be39a181461011d5780636ebcd2c21461013057806387fca42f1461015a578063b75e34911461016d575f80fd5b8063035bcf76146100945780630a67fc31146100ba5780631bdc1e5e146100c357806332ba3199146100d8575b5f80fd5b6100a76100a2366004610683565b610197565b6040519081526020015b60405180910390f35b6100a760035481565b6100d66100d13660046106cb565b610230565b005b6100fa6100e63660046106cb565b60016020525f908152604090205460ff1681565b60405190151581526020016100b1565b6100d66101183660046106cb565b6102a2565b6100d661012b3660046106eb565b61034c565b5f54610142906001600160a01b031681565b6040516001600160a01b0390911681526020016100b1565b6100d661016836600461075f565b610590565b6100a761017b3660046107dd565b600260209081525f928352604080842090915290825290205481565b6040516e454447452d4a414e474b41522d763160881b602082015246602f8201526bffffffffffffffffffffffff1930606090811b8216604f84015286901b1660638201526001600160e01b031960e085901b1660778201526001600160f01b031960f084901b16607b820152607d81018290525f90609d01604051602081830303815290604052805190602001209050949350505050565b5f546001600160a01b0316331461025a5760405163e568205360e01b815260040160405180910390fd5b6001600160a01b0381165f81815260016020526040808220805460ff19169055517fae9a39ae4ce9389297bb26189a5331183f38eec5189f5d112be5de6b373d1cd49190a250565b5f546001600160a01b031633146102cc5760405163e568205360e01b815260040160405180910390fd5b6001600160a01b0381166102f3576040516329a3444160e11b815260040160405180910390fd5b5f80546040516001600160a01b03808516939216917f4d2f970658528b97409d9cef8eb66d4d0e9d71c7bd3d8dd458c2d2ab93ba310191a35f80546001600160a01b0319166001600160a01b0392909216919091179055565b6001600160a01b0387165f9081526001602052604090205460ff1661038457604051633d2a1af160e21b815260040160405180910390fd5b61ffff85161580610393575083155b156103b15760405163148665bf60e31b815260040160405180910390fd5b6001600160a01b0387165f90815260026020908152604080832063ffffffff8a16845290915290205480156104005760405163dd11416160e01b81526004810182905260240160405180910390fd5b7f7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a082118061044157508360ff16601b1415801561044157508360ff16601c14155b1561045f57604051634e40baab60e01b815260040160405180910390fd5b5f600161046e8a8a8a8a610197565b604080515f8152602081018083529290925260ff881690820152606081018690526080810185905260a0016020604051602081039080840390855afa1580156104b9573d5f803e3d5ffd5b5050604051601f1901519150506001600160a01b03811615806104ee5750886001600160a01b0316816001600160a01b031614155b1561050c57604051634e40baab60e01b815260040160405180910390fd5b6001600160a01b0389165f81815260026020908152604080832063ffffffff8d16808552908352928190208a9055600380546001019055805161ffff8c1681529182018a90523382820152519192917fd0e205e6cbad19d4c67124261c71fd525096b059c79e51ffc3dd9cebc7a81cc39181900360600190a3505050505050505050565b5f546001600160a01b031633146105ba5760405163e568205360e01b815260040160405180910390fd5b6001600160a01b0383166105e1576040516329a3444160e11b815260040160405180910390fd5b6001600160a01b0383165f81815260016020819052604091829020805460ff19169091179055517fd614cd6d5ed487aee3544b71912a26fce133b86bb6bafb85ebb1220e7ea9f92c90610637908590859061080e565b60405180910390a2505050565b80356001600160a01b038116811461065a575f80fd5b919050565b803563ffffffff8116811461065a575f80fd5b803561ffff8116811461065a575f80fd5b5f805f8060808587031215610696575f80fd5b61069f85610644565b93506106ad6020860161065f565b92506106bb60408601610672565b9396929550929360600135925050565b5f602082840312156106db575f80fd5b6106e482610644565b9392505050565b5f805f805f805f60e0888a031215610701575f80fd5b61070a88610644565b96506107186020890161065f565b955061072660408901610672565b945060608801359350608088013560ff81168114610742575f80fd5b9699959850939692959460a0840135945060c09093013592915050565b5f805f60408486031215610771575f80fd5b61077a84610644565b9250602084013567ffffffffffffffff811115610795575f80fd5b8401601f810186136107a5575f80fd5b803567ffffffffffffffff8111156107bb575f80fd5b8660208284010111156107cc575f80fd5b939660209190910195509293505050565b5f80604083850312156107ee575f80fd5b6107f783610644565b91506108056020840161065f565b90509250929050565b60208152816020820152818360408301375f818301604090810191909152601f909201601f1916010191905056fea264697066735822122031f3cf2c8495f808749647158169f5ce11423c9218f14658290efced90f7456364736f6c634300081a0033"
+}

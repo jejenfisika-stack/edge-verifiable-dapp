@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+body { background: #0F0D08; color: #EDE6D3; }
+
+/* angka sejajar agar kolom nilai tidak "menari" saat diperbarui */
+.angka { font-variant-numeric: tabular-nums; }
+
+:focus-visible { outline: 2px solid #C9A84C; outline-offset: 2px; }
