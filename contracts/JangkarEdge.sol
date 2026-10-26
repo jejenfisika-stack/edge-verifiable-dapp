@@ -23,11 +23,19 @@ pragma solidity 0.8.26;
  *  chainid & alamat kontrak mencegah tanda tangan dipakai ulang di jaringan
  *  atau kontrak lain.
  *
+ *  Waktu: jangkar hanya diterima untuk jam yang SUDAH BERAKHIR (toleransi
+ *  5 menit untuk selisih jam alat). Dengan begitu cap waktu blok menjadi batas
+ *  atas kapan data jam itu sudah ada (bukti keberadaan), dan alat tidak dapat
+ *  "memesan" jam di masa depan.
+ *
  *  Hemat gas: hanya `rantai` yang disimpan (1 slot). `jumlah` & pengirim ada
  *  di event; `jumlah` juga ikut ditandatangani.
  * ============================================================
  */
 contract JangkarEdge {
+    string public constant VERSI = "JangkarEdge 1.0";
+    uint256 public constant TOLERANSI_DETIK = 300;      // selisih jam alat yang ditoleransi
+
     // n/2 kurva secp256k1: tanda tangan dengan s > n/2 ditolak (cegah malleability)
     uint256 private constant SETENGAH_N =
         0x7fffffffffffffffffffffffffffffff5d576e7357a4501ddfe92f46681b20a0;
@@ -47,6 +55,7 @@ contract JangkarEdge {
     error AlamatNol();
     error PerangkatTidakTerdaftar();
     error JangkarKosong();
+    error JamBelumBerakhir();
     error JangkarSudahAda(bytes32 rantaiTersimpan);
     error TandaTanganTidakSah();
 
@@ -92,6 +101,8 @@ contract JangkarEdge {
     ) external {
         if (!perangkatTerdaftar[perangkat]) revert PerangkatTidakTerdaftar();
         if (jumlah == 0 || rantai == bytes32(0)) revert JangkarKosong();
+        // akhir jam (epoch) harus <= waktu blok + toleransi
+        if ((uint256(jam) + 1) * 3600 > block.timestamp + TOLERANSI_DETIK) revert JamBelumBerakhir();
         bytes32 tersimpan = rantaiJangkar[perangkat][jam];
         if (tersimpan != bytes32(0)) revert JangkarSudahAda(tersimpan);
         if (uint256(s) > SETENGAH_N || (v != 27 && v != 28)) revert TandaTanganTidakSah();

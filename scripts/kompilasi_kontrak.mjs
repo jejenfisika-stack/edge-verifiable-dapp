@@ -12,7 +12,7 @@ const masukan = {
   settings: {
     optimizer: { enabled: true, runs: 200 },
     evmVersion: 'cancun',
-    outputSelection: { '*': { '*': ['abi', 'evm.bytecode.object', 'evm.deployedBytecode.object', 'evm.gasEstimates'] } },
+    outputSelection: { '*': { '*': ['abi', 'evm.bytecode.object', 'evm.deployedBytecode.object', 'evm.gasEstimates', 'storageLayout'] } },
   },
 };
 const keluaran = JSON.parse(solc.compile(JSON.stringify(masukan)));
@@ -23,7 +23,10 @@ if (pesan.some(e => e.severity === 'error')) process.exit(1);
 const k = keluaran.contracts['JangkarEdge.sol'].JangkarEdge;
 mkdirSync(new URL('../contracts/build/', import.meta.url), { recursive: true });
 writeFileSync(new URL('../contracts/build/JangkarEdge.json', import.meta.url),
-  JSON.stringify({ compiler: solc.version(), abi: k.abi, bytecode: '0x' + k.evm.bytecode.object }, null, 2));
+  JSON.stringify({ compiler: solc.version(), settings: masukan.settings, abi: k.abi,
+                   bytecode: '0x' + k.evm.bytecode.object, deployedBytecode: '0x' + k.evm.deployedBytecode.object,
+                   storageLayout: k.storageLayout.storage.map(s => ({ label: s.label, slot: s.slot, offset: s.offset, type: s.type })) }, null, 2));
+console.log('tata letak storage:', k.storageLayout.storage.map(s => `${s.label}@${s.slot}`).join(', '));
 writeFileSync(new URL('../lib/JangkarEdge.abi.mjs', import.meta.url),
   `// Dibuat oleh scripts/kompilasi_kontrak.mjs — jangan diubah tangan\nexport default ${JSON.stringify(k.abi, null, 2)};\n`);
 console.log(`solc ${solc.version()}`);

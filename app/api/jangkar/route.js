@@ -36,10 +36,10 @@ export async function POST(req) {
   let b;
   try { b = await req.json(); } catch { return balas(400, { status: 'json_tidak_sah' }); }
 
-  // 1. Bentuk data
-  const jamKini = Math.floor(Date.now() / 3600e3);
+  // 1. Bentuk data. Jam harus sudah berakhir (toleransi 300 dtk, sama dengan kontrak), maks. 90 hari lalu
+  const detikKini = Math.floor(Date.now() / 1000), jamKini = Math.floor(detikKini / 3600);
   const sah = b && /^0x[0-9a-fA-F]{40}$/.test(b.perangkat)
-    && Number.isInteger(b.jam) && b.jam > 0 && b.jam <= jamKini && b.jam >= jamKini - 24 * 90   // jam sudah lewat, maks. 90 hari
+    && Number.isInteger(b.jam) && b.jam > 0 && (b.jam + 1) * 3600 <= detikKini + 300 && b.jam >= jamKini - 24 * 90
     && Number.isInteger(b.jumlah) && b.jumlah >= 1 && b.jumlah <= 3600
     && HEX32.test(b.rantai) && b.rantai !== ZeroHash && HEX32.test(b.r) && HEX32.test(b.s);
   if (!sah) return balas(400, { status: 'data_tidak_sah' });

@@ -10,7 +10,8 @@
     "kompilasi-kontrak": "node scripts/kompilasi_kontrak.mjs",
     "vektor-uji": "node scripts/vektor_uji.mjs",
     "uji-jangkar": "node scripts/uji_jangkar.mjs",
-    "uji-integrasi": "node scripts/uji_integrasi.mjs"
+    "uji-integrasi": "node scripts/uji_integrasi.mjs",
+    "uji-kontrak": "node scripts/uji_kontrak_rpc.mjs"
   },
   "dependencies": {
     "ethers": "6.16.0",

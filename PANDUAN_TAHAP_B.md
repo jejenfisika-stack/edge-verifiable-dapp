@@ -18,8 +18,10 @@ Langkah yang harus Anda lakukan sendiri ditandai **(Anda)**.
 
 Buat akun MetaMask **baru, khusus testnet** (mis. "Relayer Proyek 9"). Jangan memakai akun yang
 menyimpan aset sungguhan. Isi saldo POL Amoy dari faucet.
-Perkiraan biaya: ±55–60 ribu gas per jangkar → 24 jangkar per hari. Angka gas nyata dikembalikan
-relayer pada tiap jangkar (`gas` di balasan) dan saldo relayer tampil di halaman Verifikasi.
+Biaya terukur (simulasi EVM Amoy, `npm run uji-kontrak`): jangkar pertama 87.519 gas, berikutnya
+69.571 gas. Pada harga gas 30 gwei (26 Okt 2026): ±0,0021 POL per jangkar → ±0,05 POL per hari →
+±1,5 POL per 30 hari. Pastikan faucet mencukupi; saldo relayer tampil di halaman Verifikasi dan gas
+nyata dikembalikan relayer pada tiap jangkar (`gas` di balasan).
 
 ## 3. Firmware v2.0 (Anda: upload)
 
@@ -79,7 +81,8 @@ Jangkar pertama terbentuk saat jam berganti (catatan pertama jam berikutnya), la
 
 | Uji | Hasil |
 |---|---|
-| `npm run kompilasi-kontrak` | solc 0.8.26, 0 peringatan, 2.162 byte |
+| `npm run kompilasi-kontrak` | solc 0.8.26, 0 peringatan, 2.445 byte (JangkarEdge 1.0, aturan jam harus sudah berakhir) |
+| `npm run uji-kontrak` | 35/35 OK di EVM Amoy (eth_simulateV1, tanpa gas): deploy, jangkar sah, 10 jenis serangan/kesalahan ditolak, batas waktu tepat, pencabutan, ganti pemilik, vektor firmware diterima |
 | `npm run uji-jangkar <folder data>` | 125.125 nilai nyata: teks kanonik tidak mengubah nilai; perubahan/hapus/tukar/sisip data dan tanda tangan palsu terdeteksi |
 | `npm run vektor-uji` | keccak256("") dan ("abc") = nilai baku; vektor ditanam di firmware |
 | Firmware v2.0 | compile tanpa peringatan, 1.162.187 byte (88 %) |
